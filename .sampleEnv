@@ -1,0 +1,15 @@
+MONGO_URI = mongodb://127.0.0.1:27017
+
+JWT_SECRET = fslfjsjieoflasfjpjpalhfwualfjwer2938
+
+ADMIN_SECRET_KEY = kfsljfseohfsklfuweiwal4545435
+
+NODE_ENV = DEVELOPMENT
+
+CLIENT_URL = frontend URL
+
+CLOUDINARY_NAME = 
+
+CLOUDINARY_API_KEY = 
+
+CLOUDINARY_API_SECRET = 
