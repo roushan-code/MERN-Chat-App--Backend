@@ -8,11 +8,17 @@ import { chatApp_token } from "../constants/config.js";
 
 const isAuthenticated = TryCatch(async (req, res, next) => {
     // console.log(req.cookies["chatApp-token"])
-    const token = req.cookies[chatApp_token];
+    // const token = req.cookies[chatApp_token];
+    const token = req.headers["authorization"];
+    // console.log(req.headers["authorization"])
+
     if (!token) return next(new ErrorHandler("Please login to access this route", 401));
 
-    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-    // console.log(decodedData);
+    // console.log(token.split("Bearer ")[1])
+    const verifyToken = token.split("Bearer ")[1];
+    // console.log(token)
+
+    const decodedData = jwt.verify(verifyToken, process.env.JWT_SECRET);
     req.user = decodedData.id;
     // console.log(req.user)
 
@@ -21,10 +27,13 @@ const isAuthenticated = TryCatch(async (req, res, next) => {
 
 export const isAdmin = TryCatch(async (req, res, next) => {
     // console.log(req.cookies["chatApp-token"])
-    const token = req.cookies["chatApp-token-admin"];
+    // const token = req.cookies["chatApp-token-admin"];
+    const token = req.headers["authorization"];
     if (!token) return next(new ErrorHandler("Only Admin can access this route", 401));
 
-    const secretKey = jwt.verify(token, process.env.JWT_SECRET);
+    const verifyToken = token.split("Bearer ")[1];
+
+    const secretKey = jwt.verify(verifyToken, process.env.JWT_SECRET);
 
     const isMatched = secretKey === adminSecretKey;
 
@@ -33,15 +42,17 @@ export const isAdmin = TryCatch(async (req, res, next) => {
     next();
 })
 
-const socketAuthentication = async (err, socket, next) => {
+const socketAuthentication = async ( socket, next) => {
     try {
-        if (err) return next(err);
-        const authToken = socket.request.cookies[chatApp_token];
-        // console.log(authToken)
+        
+        const authToken = socket.request._query.authorization;
 
         if (!authToken) return next(new ErrorHandler("Please login to access this route", 401))
 
-        const decodedData = jwt.verify(authToken, process.env.JWT_SECRET);
+        const verifyToken = authToken.split("Bearer ")[1]
+        // console.log("Verify Token", verifyToken)
+
+        const decodedData = jwt.verify(verifyToken, process.env.JWT_SECRET);
         // console.log(decodedData)
 
         const user = await User.findById(decodedData.id);

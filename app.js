@@ -62,8 +62,7 @@ app.get("/", (req, res)=>{
 })
 
 io.use((socket, next)=>{
-    cookieParser()(socket.request, socket.request.res, async (err) => await socketAuthentication(err, socket, next )
-    )
+    socketAuthentication(socket, next)
 })
 
 io.on("connection", (socket)=>{

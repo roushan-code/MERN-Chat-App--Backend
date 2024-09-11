@@ -65,8 +65,9 @@ export const getMyProfile = TryCatch(async (req, res) => {
 })
 export const logout = TryCatch(async (req, res) => {
 
-
-    res.status(200).cookie("chatApp-token", "", { ...cookieOption, maxAge: 0 }).json({
+    // .cookie("chatApp-token", "", { ...cookieOption, maxAge: 0 })
+    res.status(200)
+    .json({
         success: true,
         data: "Logout Successfully"
     })
@@ -209,7 +210,6 @@ export const getMyFriends = TryCatch(async (req, res, next) => {
         const availableFriends = friends.filter(
             (friend) => !chat.members.includes(friend._id)
         );
-        console.log(chat)
 
         return res.status(200).json({
             success: true,

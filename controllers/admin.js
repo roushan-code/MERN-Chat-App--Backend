@@ -16,9 +16,12 @@ export const adminLogin = TryCatch(async(req, res, next)=>{
 
     const token = jwt.sign(secretKey, process.env.JWT_SECRET);
 
-    return res.status(200).cookie("chatApp-token-admin", token, {...cookieOption, maxAge: 1000*60*15}).json({
+    // .cookie("chatApp-token-admin", token, {...cookieOption, maxAge: 1000*60*15})
+    return res.status(200)
+    .json({
         success: true,
-        message: "Admin Logged In, Welcome Boss"
+        message: "Admin Logged In, Welcome Boss",
+        token
     });
 })
 

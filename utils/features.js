@@ -34,15 +34,16 @@ export const sendToken = (res, user, code, message) => {
     }, process.env.JWT_SECRET, {
         expiresIn: "15d"
     })
+    // console.log("sendToken features", token);
 
 
-
+    // .cookie("chatApp-token", token, cookieOption)
     return res.status(code)
-        .cookie("chatApp-token", token, cookieOption)
         .json({
             success: true,
             message,
-            user
+            user,
+            token
         })
 }
 
