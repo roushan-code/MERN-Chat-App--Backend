@@ -22,7 +22,7 @@ export const newGroupChat = TryCatch(async (req, res, next) => {
         creator: req.user,
 
     });
-     console.log(chat)
+    //  console.log(chat)
 
     emitEvent(req, ALERT, allMembers, {message: `Welcome to ${name} group`, chatId: chat._id});
     emitEvent(req, REFETCH_CHATS, members);
