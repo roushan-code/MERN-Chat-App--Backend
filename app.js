@@ -5,18 +5,18 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { v4 as uuid } from 'uuid';
-import { CHAT_JOIN, CHAT_LEAVE, NEW_MESSAGE, NEW_MESSAGE_ALERT, ONLINE_USERS, START_TYPING, STOP_TYPING } from "../constants/events.js";
-import { getSockets } from "../lib/helper.js";
-import { errorMiddleware } from "../middlewares/error.js";
-import { Message } from "../models/Message.js";
-import adminRoute from "../routes/admin.js";
-import chatRouter from "../routes/chat.js";
-import userRouter from "../routes/user.js";
-import { connectDB } from "../utils/features.js";
+import { CHAT_JOIN, CHAT_LEAVE, NEW_MESSAGE, NEW_MESSAGE_ALERT, ONLINE_USERS, START_TYPING, STOP_TYPING } from "./constants/events.js";
+import { getSockets } from "./lib/helper.js";
+import { errorMiddleware } from "./middlewares/error.js";
+import { Message } from "./models/Message.js";
+import adminRoute from "./routes/admin.js";
+import chatRouter from "./routes/chat.js";
+import userRouter from "./routes/user.js";
+import { connectDB } from "./utils/features.js";
 
 import { v2 as cloudinary } from 'cloudinary';
-import { corsOptions } from "../constants/config.js";
-import { socketAuthentication } from "../middlewares/auth.js";
+import { corsOptions } from "./constants/config.js";
+import { socketAuthentication } from "./middlewares/auth.js";
 // import { createGroupChat, createSingleChat, createUser } from "./seeders/user.js";
 
 dotenv.config({

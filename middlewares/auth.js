@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { ErrorHandler } from "../utils/utility.js";
 import { TryCatch } from "./error.js";
 import { User } from "../models/User.js";
-import { adminSecretKey } from "../api/index.js";
+import { adminSecretKey } from "../app.js";
 import { chatApp_token } from "../constants/config.js";
 
 

@@ -1,4 +1,4 @@
-import { adminSecretKey } from "../api/index.js";
+import { adminSecretKey } from "../app.js";
 import { TryCatch } from "../middlewares/error.js";
 import { Chat } from "../models/Chat.js";
 import { Message } from "../models/Message.js";
